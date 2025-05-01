@@ -15,7 +15,7 @@ products.forEach((product) => {
 
             <div class="product-rating-container">
                 <img class="product-rating-stars"
-                    src="images/ratings/rating-${product.rating.starts * 10}.png">
+                    src="images/ratings/rating-${product.rating.stars * 10}.png">
                 <div class="product-rating-count link-primary">
                     ${product.rating.count}
                 </div>
@@ -47,7 +47,8 @@ products.forEach((product) => {
                 Added
             </div>
 
-            <button class="add-to-cart-button button-primary">
+            <button class="add-to-cart-button button-primary js-add-to-cart"
+            data-product-id="${product.id}">
                 Add to Cart
             </button>
         </div>
@@ -57,3 +58,33 @@ products.forEach((product) => {
 console.log(productsHtml);
 
 document.querySelector('.js-products-grid').innerHTML = productsHtml
+
+// list of all add to cart buttons
+document.querySelectorAll('.js-add-to-cart').forEach((button, i) => {
+    button.addEventListener('click', () => {
+        //Data attribute 
+        // console.log(button.dataset); // gets all the data attributes linked to the html element
+        // console.log(button.dataset.productName); 
+
+        const productId = button.dataset.productId;//  converts from kabab case to camel 
+
+        // Compares the product id from the cart button to the existing cart and stores it in a var if found
+        let matchingItem;
+        cart.forEach((item) => {
+            if (productId === item.productId){
+                matchingItem = item
+            }
+        });
+
+        // if the matching item was found, increase the quantity in cart, else add to cart 
+        if (matchingItem) {
+            matchingItem.quantity += 1;
+        }else {
+            cart.push({productId,
+                quantity: 1
+            })    
+        }
+
+        console.log(cart);
+    })
+});
