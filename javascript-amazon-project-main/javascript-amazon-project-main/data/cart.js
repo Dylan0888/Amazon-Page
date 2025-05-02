@@ -1,1 +1,1 @@
-const cart = []
+export const cart = []; // Allows cart to be used outside the file 
