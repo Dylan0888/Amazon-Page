@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHtml = '' // Accumulating the results of the templated strings 
@@ -61,6 +61,16 @@ console.log(productsHtml);
 
 document.querySelector('.js-products-grid').innerHTML = productsHtml
 
+function updateCartQuantity(){
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+
+    //Updates the cart number in the header 
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
 // list of all add to cart buttons
 document.querySelectorAll('.js-add-to-cart').forEach((button, i) => {
     button.addEventListener('click', () => {
@@ -69,36 +79,9 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, i) => {
         // console.log(button.dataset.productName); 
 
         const productId = button.dataset.productId;//  converts from kabab case to camel 
-
-        // Compares the product id from the cart button to the existing cart and stores it in a var if found
-        let matchingItem;
-        cart.forEach((item) => {
-            if (productId === item.productId){
-                matchingItem = item
-            }
-        });
-
-        // if the matching item was found, increase the quantity in cart, else add to cart 
-        if (matchingItem) {
-            matchingItem.quantity += 1;
-        }else {
-            cart.push({productId,
-                quantity: 1
-            });  
-        }
+        addToCart(productId);
 
         // Adds up all the values inside of the cart
-        let cartQuantity = 0;
-        cart.forEach((item) => {
-            cartQuantity += item.quantity;
-        });
-
-        //Updates the cart number in the header 
-        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
-
-
-        console.log(cartQuantity);
-        console.log(cart);
+        updateCartQuantity();
     });
 });
