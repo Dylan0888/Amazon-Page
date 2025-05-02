@@ -1,4 +1,6 @@
 import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 let productsHtml = '' // Accumulating the results of the templated strings 
 // for each product in the array create the html 
 products.forEach((product) => {
