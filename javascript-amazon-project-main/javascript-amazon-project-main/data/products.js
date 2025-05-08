@@ -1,3 +1,16 @@
+export function getProduct(productId){
+    let matchingProduct;
+    // Find the corresponding product from the product list
+    products.forEach((product) => {
+        if (product.id === productId) {
+            matchingProduct = product;
+        }
+    });
+    return matchingProduct;
+}
+
+
+
 // Generating the html data using js
 export const products = [
   {
