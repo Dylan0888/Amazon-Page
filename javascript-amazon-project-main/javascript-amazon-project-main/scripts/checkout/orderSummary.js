@@ -6,11 +6,6 @@ import { getProduct } from "../../data/products.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 
-// Log a sample delivery date (7 days from today) for reference/debugging
-const today = dayjs();
-const deliveryDate = today.add(7,'days');
-console.log(deliveryDate.format('dddd, MMMM D'));
-
 export function renderOrderSummary(){
 
     // Create HTML for each item in the cart
