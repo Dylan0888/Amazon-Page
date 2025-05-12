@@ -1,6 +1,6 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-console.log('Test Suite: format Currency')
+console.log('   Test Suite: format Currency')
 
 //Basic test case
 if (formatCurrency(2095) === '20.95'){
